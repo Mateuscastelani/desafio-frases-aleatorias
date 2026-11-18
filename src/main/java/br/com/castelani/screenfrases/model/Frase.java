@@ -15,6 +15,17 @@ public class Frase {
     private String personagem;
     private String poster;
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    private Boolean ativo = true;
+
+
     public Long getId() {
         return id;
     }
