@@ -5,7 +5,9 @@ import br.com.castelani.screenfrases.model.Frase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FraseService {
@@ -15,7 +17,13 @@ public class FraseService {
     private FraseRepository repositorio;
     public FraseDTO obterFraseAleatoria() {
         Optional<Frase> frase = repositorio.encontrarFraseAleatoriaAtiva();
-        return new FraseDTO(frase.get().getTitulo(), frase.get().getFrase(), frase.get().getPersonagem(), frase.get().getPoster());
+        return new FraseDTO(frase.get().getId(),  frase.get().getTitulo(), frase.get().getFrase(), frase.get().getPersonagem(), frase.get().getPoster());
+    }
+
+    public List<FraseDTO> obterTodasAsFrases() {
+        return repositorio.findAllByAtivoTrue().stream()
+                .map(f -> new FraseDTO(f.getId(), f.getTitulo(), f.getFrase(), f.getPersonagem(), f.getPoster()))
+                .collect(Collectors.toList());
     }
 
 

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/series/frases")
@@ -18,6 +20,11 @@ public class FraseController {
     @GetMapping
     public ResponseEntity<FraseDTO> obterFraseAleatoria() {
         return ResponseEntity.ok(servico.obterFraseAleatoria()); // Devolve 200 OK
+    }
+
+    @GetMapping("/todas")
+    public ResponseEntity<List<FraseDTO>> obterTodasAsFrases() {
+        return ResponseEntity.ok(servico.obterTodasAsFrases());
     }
 
     @PostMapping
